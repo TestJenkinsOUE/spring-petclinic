@@ -8,7 +8,7 @@ pipeline {
         sleep 5
         withMaven(
                     maven: 'M3' // Maven installation declared in the Jenkins "Global Tool Configuration"
-                    //mavenSettingsConfig: 'settings.xml' // Maven settings.xml file defined with the Jenkins Config File Provider Plugin
+                    //mavenSettingsConfig: 'settings.xml' // Maven settings.xml file defined with the Jenkins Config File Provider Plugin => à ajouter directement sur jenkins : Manage Jenkins > Managed files > Add a new Config > 
                     ) {
 
                   // Run the maven build
