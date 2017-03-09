@@ -1,70 +1,55 @@
 pipeline {
-
+  agent any
+  stages {
     stage('build & unit tests') {
-        node("build") {
-            echo 'build & unit tests'
-            sleep 5
-        }
-
-
+      steps {
+        sh 'echo "build & unit tests"'
+        sleep(time: '5', unit: 'SECONDS')
+      }
     }
     stage('static-analysis') {
-        node("build") {
-            echo 'static-analysis'
-            sleep 5
-        }
-
+      steps {
+        sh 'echo "static-analysis"'
+        sleep(time: '5', unit: 'SECONDS')
+      }
     }
     stage('acceptance-tests') {
-        echo 'acceptance-tests'
+      steps {
         parallel(
-                "chrome": {
-                    node("build") {
-                        echo "chrome"
-                        sleep 5
-                    }
+          "chrome": {
+            sh 'echo "chrome"'
+            sleep(time: '5', unit: 'SECONDS')
+          },
+          "edge": {
+            sh 'echo "edge"'
+            sleep(time: '5', unit: 'SECONDS')
 
-                },
-                "edge": {
-                    node("build") {
-                        echo "edge"
-                        sleep 5
-                    }
+          },
+          "firefox": {
+            sh 'echo "fire"'
+            sleep(time: '5', unit: 'SECONDS')
 
-                },
-                "firefox": {
-                    node("build") {
-                        echo "firefox"
-                        sleep 5
-                    }
-
-                }
-
+          }
         )
+        
+      }
     }
-
     stage('staging') {
-        node("build") {
-            echo 'staging'
-            sleep 5
-        }
-
+      steps {
+        sh 'echo "staging"'
+        sleep(time: '5', unit: 'SECONDS')
+      }
     }
-
-
     stage('manual-approval') {
-        input 'manual-approval ?'
+      steps {
+        input 'Want to continue ?'
+      }
     }
-
     stage('deploy') {
-        node("build") {
-            echo 'deploys'
-            sleep 5
-        }
-
+      steps {
+        sh 'echo "deploy"'
+        sleep(time: '5', unit: 'SECONDS')
+      }
     }
-
-
-
-
+  }
 }
