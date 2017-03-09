@@ -7,9 +7,9 @@ pipeline {
         sh 'echo "build and unit tests"'
         sleep 5
         withMaven(
-                    maven: 'M3', // Maven installation declared in the Jenkins "Global Tool Configuration"
-                    mavenSettingsConfig: 'my-maven-settings', // Maven settings.xml file defined with the Jenkins Config File Provider Plugin
-                    mavenLocalRepo: '.repository') {
+                    maven: 'M3' // Maven installation declared in the Jenkins "Global Tool Configuration"
+                    //mavenSettingsConfig: 'settings.xml' // Maven settings.xml file defined with the Jenkins Config File Provider Plugin
+                    ) {
 
                   // Run the maven build
                   sh "mvn clean install"
