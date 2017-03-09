@@ -2,9 +2,20 @@ pipeline {
   agent any
   stages {
     stage('build & unit tests') {
+
       steps {
         sh 'echo "build and unit tests"'
         sleep 5
+        withMaven(
+                    maven: 'M3', // Maven installation declared in the Jenkins "Global Tool Configuration"
+                    mavenSettingsConfig: 'my-maven-settings', // Maven settings.xml file defined with the Jenkins Config File Provider Plugin
+                    mavenLocalRepo: '.repository') {
+
+                  // Run the maven build
+                  sh "mvn clean install"
+
+                }
+        /**withMaven(globalMavenSettingsConfig: 'GlobalMavenSettingsConfig', globalMavenSettingsFilePath: 'GlobalMavenSettingsFilePath', jdk: 'Jdk', maven: 'Maven', mavenLocalRepo: 'MavenLocalRepo', mavenOpts: 'MavenOpts', mavenSettingsConfig: 'MavenSettingsConfig', mavenSettingsFilePath: 'MavenSettingsFilePath')*/
       }
     }
     stage('static-analysis') {
