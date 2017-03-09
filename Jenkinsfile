@@ -4,13 +4,13 @@ pipeline {
     stage('build & unit tests') {
       steps {
         sh 'echo "build and unit tests"'
-        sleep(time: 5, unit: 'SECONDS')
+        sleep 5
       }
     }
     stage('static-analysis') {
       steps {
         sh 'echo "static-analysis"'
-        sleep(time: 5, unit: 'SECONDS')
+        sleep 5
       }
     }
     stage('acceptance-tests') {
@@ -18,16 +18,16 @@ pipeline {
         parallel(
           "chrome": {
             sh 'echo "chrome"'
-            sleep(time: 5, unit: 'SECONDS')
+            sleep 5
           },
           "edge": {
             sh 'echo "edge"'
-            sleep(time: 5, unit: 'SECONDS')
+            sleep 5
 
           },
           "firefox": {
             sh 'echo "fire"'
-            sleep(time: 5, unit: 'SECONDS')
+            sleep 5
 
           }
         )
@@ -37,7 +37,7 @@ pipeline {
     stage('staging') {
       steps {
         sh 'echo "staging"'
-        sleep(time: 5, unit: 'SECONDS')
+        sleep 5
       }
     }
     stage('manual-approval') {
@@ -48,7 +48,7 @@ pipeline {
     stage('deploy') {
       steps {
         sh 'echo "deploy"'
-        sleep(time: 5, unit: 'SECONDS')
+        sleep 5
       }
     }
   }
