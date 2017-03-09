@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('build & unit tests') {
       steps {
-        sh 'echo "build & unit tests"'
+        sh 'echo "build and unit tests"'
         sleep(time: '5', unit: 'SECONDS')
       }
     }
